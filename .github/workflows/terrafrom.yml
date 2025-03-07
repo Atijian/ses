@@ -1,0 +1,48 @@
+name: SES
+run-name: Terrafrom SES
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        type: boolean
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  Deploy-Terrafrom:
+    environment: ${{inputs.environment}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up OIDC connection
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: arn:aws:iam::831926611748:user/test_user_SES
+          aws-region: eu-west-1 
+
+      - name: AWS Provider Auth
+        run: |
+          echo aws_region=\"$AWS_DEFAULT_REGION\" >> .auto.tfvars
+          echo aws_access_key=\"$AWS_ACCESS_KEY_ID\" >> .auto.tfvars
+          echo aws_secret_key=\"$AWS_SECRET_ACCESS_KEY\" >> .auto.tfvars
+          echo aws_token=\"$AWS_SESSION_TOKEN\" >> .auto.tfvars
+          echo environment=\"${{ inputs.environment }}\" >> .auto.tfvars
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: ${{inputs.apply}}
+        run: terraform apply -auto-approve
+
+      - name: Terraform Destroy
+        if: ${{inputs.destroy}}
+        run: terraform destroy -auto-approve
