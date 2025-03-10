@@ -23,7 +23,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
           role-to-assume: arn:aws:iam::831926611748:role/SES_testing
-          aws-region: eu-west-1
+          aws-region: us-east-1
 
       - name: Send email using SES
         run: |
