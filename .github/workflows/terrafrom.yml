@@ -22,7 +22,7 @@ jobs:
       - name: Set up OIDC connection
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
-          role-to-assume: arn:aws:iam::831926611748:user/test_user_SES
+          role-to-assume: arn:aws:iam::831926611748:oidc-provider/token.actions.githubusercontent.com
           aws-region: eu-west-1
 
       - name: Send email using SES
