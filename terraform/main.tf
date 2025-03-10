@@ -1,0 +1,3 @@
+module "ses" {
+  source       = "./ses"
+}
