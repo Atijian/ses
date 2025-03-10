@@ -28,9 +28,18 @@ jobs:
       - name: Send email using SES
         run: |
           aws ses send-email \
-           --from "legitcydoc@gmail.com" \
-           --destination "ToAddresses=attacktitan1989@gmail.com" \
-           --message "Subject={Data=Test Email from GitHub Actions},Body={Text={Data=Hello, this is a test email sent using GitHub Actions and SES.}}"
+           --from "sender@example.com" \
+           --destination '{"ToAddresses":["attacktitan1989@gmail.com"]}' \
+           --message '{
+             "Subject": {
+             "Data": "Test Email from GitHub Actions"
+          },
+          "Body": {
+            "Text": {
+              "Data": "Hello, this is a test email sent using GitHub Actions and SES."
+          }
+          }
+           }'
 
             
 
