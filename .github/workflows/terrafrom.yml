@@ -35,7 +35,12 @@ jobs:
           echo aws_secret_key=\"$AWS_SECRET_ACCESS_KEY\" >> .auto.tfvars
           echo aws_token=\"$AWS_SESSION_TOKEN\" >> .auto.tfvars
           echo environment=\"${{ inputs.environment }}\" >> .auto.tfvars
-
+      - name: Terrafrom install
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install terraform
+          
       - name: Terraform Init
         run: terraform init
 
