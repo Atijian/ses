@@ -21,6 +21,7 @@ jobs:
 
       - name: Install Terraform
         run: |
+          sudo rm /usr/local/bin/terraform
           sudo apt-get update -y
           sudo apt-get install -y wget unzip
           wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
