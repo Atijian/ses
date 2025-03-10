@@ -28,7 +28,7 @@ jobs:
       - name: Send email using SES
         run: |
           aws ses send-email \
-           --from "sender@example.com" \
+           --from "legitcydoc@gmail.com" \
            --destination '{"ToAddresses":["attacktitan1989@gmail.com"]}' \
            --message '{
              "Subject": {
