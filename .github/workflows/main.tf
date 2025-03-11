@@ -6,10 +6,6 @@ provider "aws" {
   region      = us-east-1
   max_retries = 10
 
-  access_key = "AKIA4DMVQV4SEKFKYO67"
-  secret_key = "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"
-
-
 }
 
 module "ses" {
