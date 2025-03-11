@@ -32,7 +32,7 @@ aws ses send-email \
   --output json > output.json
 
 if [ $? -eq 0 ]; then
-  echo "Email sent successfully!"
+  echo "Email sent successfulljy!"
 else
   echo "Failed to send email."
 fi
